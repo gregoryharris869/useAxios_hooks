@@ -15,7 +15,6 @@ const useAxios = (configObj) => {
 
     const fetchData = async () => {
       try {
-        console.log("Fetching data...");
         const res = await axiosInstance[method.toLowerCase()](url, {
           ...requestConfig,
           signal: controller.signal,
@@ -24,10 +23,8 @@ const useAxios = (configObj) => {
         setResponse(res.data);
       } catch (err) {
         console.log(err.message);
-        // It's better to reset the error state in the useAxios hook. If an error occurs and is set, subsequent requests made through that hook will still display the error if we don't reset it. setError()
         setError("");
       } finally {
-        console.log("Fetch complete.");
         setLoading(false);
       }
     };
@@ -36,10 +33,7 @@ const useAxios = (configObj) => {
     fetchData();
 
     // useEffect cleanup function
-    return () => {
-      console.log("Cleanup function executed.");
-      controller.abort();
-    };
+    return () => controller.abort();
 
     // eslint-disable-next-line
   }, [reload]);
