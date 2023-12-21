@@ -21,9 +21,10 @@ const useAxios = (configObj) => {
         });
         console.log(res);
         setResponse(res.data);
+        setError("");
       } catch (err) {
         console.log(err.message);
-        setError("");
+        setError(err.message);
       } finally {
         setLoading(false);
       }

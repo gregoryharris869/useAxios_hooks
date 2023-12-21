@@ -19,6 +19,7 @@ const useAxiosFunction = () => {
       });
       console.log(res);
       setResponse(res.data);
+      setError("");
     } catch (err) {
       console.log(err.message);
       setError(err.message);
